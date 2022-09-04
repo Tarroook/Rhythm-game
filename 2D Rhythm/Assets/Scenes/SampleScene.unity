@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 45030060}
   - component: {fileID: 45030062}
   - component: {fileID: 45030063}
+  - component: {fileID: 45030064}
   m_Layer: 0
   m_Name: Timeline gameobject
   m_TagString: Untagged
@@ -318,6 +319,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &45030064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45030059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1480fe3780a009c46a75b5758fa2d3a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &184190630
 GameObject:
   m_ObjectHideFlags: 0

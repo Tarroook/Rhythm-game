@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6282412598693127034
+--- !u!114 &-7307582625733011656
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
   m_Name: Signal Emitter
   m_EditorClassIdentifier: 
-  m_Time: 0.3333333333333333
+  m_Time: 1.3333333333333333
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: 0b9ad4a2d1e2be440add77ffa84b01ba, type: 2}
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 0
+    m_Start: 1
     m_ClipIn: 0
     m_Asset: {fileID: 3600246199045673962}
     m_Duration: 180.1926530612245
@@ -145,7 +145,8 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: Harlem Shuffle
   m_Markers:
-    m_Objects: []
+    m_Objects:
+    - {fileID: -7307582625733011656}
   m_TrackProperties:
     volume: 1
     stereoPan: 0
@@ -172,5 +173,4 @@ MonoBehaviour:
   m_Children: []
   m_Clips: []
   m_Markers:
-    m_Objects:
-    - {fileID: -6282412598693127034}
+    m_Objects: []
