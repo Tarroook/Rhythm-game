@@ -10,6 +10,8 @@ public class NoteSpawner : MonoBehaviour
     private PlayableDirector playableDirector;
     private float timeToReact = 1f;
     
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -17,21 +19,33 @@ public class NoteSpawner : MonoBehaviour
 
         TimelineAsset timelineAsset = playableDirector.playableAsset as TimelineAsset;
         IMarker[] markers = timelineAsset.GetOutputTrack(1).GetMarkers().ToArray();
-        //playableDirector.time = markers[0].time;
-        Debug.Log("Time : " + markers[0].time);
-        bool canCreate;
-        for(int i = 0; i < markers.Length; i++)
-        {
-            canCreate = false;
-            for (int y = i; y < markers.Length; y++)
-            {
-                // code to check if there is alerady a marker
-            }
-            // code to create marker if none are made
-        }
+        
+        
+        List<BeatEmitter> beatEmitters = new List<BeatEmitter>();
+        int count = 1;
         foreach(IMarker marker in markers)
         {
-            //timelineAsset.GetOutputTrack(1).CreateMarker<SignalEmitter>(marker.time - timeToReact);
+            if (marker is EnemyWindUpSignal || marker is EnemyAttackSignal)
+            {
+                timelineAsset.GetOutputTrack(1).DeleteMarker(marker);
+            }
+            else if (marker is BeatEmitter)
+            {
+                beatEmitters.Add((BeatEmitter)marker);
+                ((BeatEmitter)marker).beatNb = count++;
+            }
+        }
+        foreach (BeatEmitter be in beatEmitters)
+        {
+            switch (be.action)
+            {
+                case "eAttack": 
+                    timelineAsset.GetOutputTrack(1).CreateMarker<EnemyWindUpSignal>(be.time - timeToReact);
+                    break;
+                default:
+                    Debug.Log("No actions recognized for marker at time :" + be.time);
+                    break;
+            }
         }
     }
 }
