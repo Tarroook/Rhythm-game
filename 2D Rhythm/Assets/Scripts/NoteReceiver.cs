@@ -7,6 +7,9 @@ public class NoteReceiver : MonoBehaviour, INotificationReceiver
 {
     public void OnNotify(Playable origin, INotification notification, object context)
     {
-        Debug.Log(notification);
+        if(notification is NoteMarker noteMarker) // do this so it doesn't react to all signals
+        {
+            Debug.Log(notification);
+        }
     }
 }
