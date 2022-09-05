@@ -19,9 +19,19 @@ public class NoteSpawner : MonoBehaviour
         IMarker[] markers = timelineAsset.GetOutputTrack(1).GetMarkers().ToArray();
         //playableDirector.time = markers[0].time;
         Debug.Log("Time : " + markers[0].time);
+        bool canCreate;
+        for(int i = 0; i < markers.Length; i++)
+        {
+            canCreate = false;
+            for (int y = i; y < markers.Length; y++)
+            {
+                // code to check if there is alerady a marker
+            }
+            // code to create marker if none are made
+        }
         foreach(IMarker marker in markers)
         {
-            timelineAsset.GetOutputTrack(1).CreateMarker<SignalEmitter>(marker.time - timeToReact);
+            //timelineAsset.GetOutputTrack(1).CreateMarker<SignalEmitter>(marker.time - timeToReact);
         }
     }
 }

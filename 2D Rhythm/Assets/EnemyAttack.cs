@@ -18,6 +18,6 @@ public class EnemyAttack : MonoBehaviour
     public void attack()
     {
         sr.sprite = attackSprite;
-        Debug.Log("Signal done");
+        Debug.Log("Enemy has attacked");
     }
 }
