@@ -22,7 +22,7 @@ public class NoteSpawner : MonoBehaviour
         
         
         List<BeatEmitter> beatEmitters = new List<BeatEmitter>();
-        int count = 1;
+        
         foreach(IMarker marker in markers)
         {
             if (marker is EnemyWindUpSignal || marker is EnemyAttackSignal)
@@ -32,18 +32,37 @@ public class NoteSpawner : MonoBehaviour
             else if (marker is BeatEmitter)
             {
                 beatEmitters.Add((BeatEmitter)marker);
-                ((BeatEmitter)marker).beatNb = count++;
             }
         }
-        foreach (BeatEmitter be in beatEmitters)
+
+        int count = beatEmitters.Count;
+        double time;
+        for (int i = 0; i < beatEmitters.Count; i++)
         {
-            switch (be.action)
+            BeatEmitter curr = beatEmitters[i];
+            curr.beatNb = count--;
+            if (i > 0)
             {
-                case "eAttack": 
-                    timelineAsset.GetOutputTrack(1).CreateMarker<EnemyWindUpSignal>(be.time - timeToReact);
+                if (curr.time - beatEmitters[i - 1].time < timeToReact)
+                {
+                    time = beatEmitters[i - 1].time * 0.9;
+                }
+                else
+                {
+                    time = curr.time - timeToReact;
+                }
+            }
+            else
+            {
+                time = curr.time - timeToReact;
+            }
+            switch (curr.action)
+            {
+                case "eAttack":
+                    timelineAsset.GetOutputTrack(1).CreateMarker<EnemyWindUpSignal>(time);
                     break;
                 default:
-                    Debug.Log("No actions recognized for marker at time :" + be.time);
+                    Debug.Log("No actions recognized for marker at time :" + curr.time);
                     break;
             }
         }

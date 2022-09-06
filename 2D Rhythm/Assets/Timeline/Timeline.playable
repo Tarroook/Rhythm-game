@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9207270474739445120
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7ed0f0ea13b4a47ab09603e227ce9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Time: 1.2
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 0}
 --- !u!114 &-8928745227806178554
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -17,8 +33,8 @@ MonoBehaviour:
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: 0b9ad4a2d1e2be440add77ffa84b01ba, type: 2}
   action: eAttack
-  beatNb: 1
---- !u!114 &-1938127862867090952
+  beatNb: 2
+--- !u!114 &-7152476733039637423
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -27,13 +43,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef7ed0f0ea13b4a47ab09603e227ce9e, type: 3}
-  m_Name: 
+  m_Script: {fileID: 11500000, guid: fe3988ad8ccafdc469b3fe4838ad744a, type: 3}
+  m_Name: Beat Emitter
   m_EditorClassIdentifier: 
-  m_Time: 0.33333333333333326
+  m_Time: 1.15
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 0}
+  action: eAttack
+  beatNb: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,11 +183,29 @@ MonoBehaviour:
   m_Markers:
     m_Objects:
     - {fileID: -8928745227806178554}
-    - {fileID: -1938127862867090952}
+    - {fileID: -7152476733039637423}
+    - {fileID: 6389689203536606118}
+    - {fileID: -9207270474739445120}
   m_TrackProperties:
     volume: 1
     stereoPan: 0
     spatialBlend: 0
+--- !u!114 &6389689203536606118
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7ed0f0ea13b4a47ab09603e227ce9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Time: 0.33333333333333326
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 0}
 --- !u!114 &6446305163800174924
 MonoBehaviour:
   m_ObjectHideFlags: 1
