@@ -17,7 +17,7 @@ public class EnemyBehavior : MonoBehaviour
 
     public void windUp()
     {
-
+        Debug.Log("Enemy winds up");
     }
 
     public void attack()

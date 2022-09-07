@@ -8,10 +8,11 @@ using UnityEngine.Timeline;
 public class NoteSpawner : MonoBehaviour
 {
     private PlayableDirector playableDirector;
-    private float timeToReact = 1f;
-    
+    private float windUpTime = 1f;
+    private float timeToReact = .3f;
 
-    
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,31 +40,35 @@ public class NoteSpawner : MonoBehaviour
             }
         }
 
-        int count = beatEmitters.Count;
-        double time;
+        beatEmitters.Sort(VariousMethods.sortByTime);
+        int count = 0;
+        double windUpSigTime;
+        double attackSigTime;
         for (int i = 0; i < beatEmitters.Count; i++)
         {
             BeatEmitter curr = beatEmitters[i];
-            curr.beatNb = count--;
+            curr.beatNb = ++count;
             if (i > 0)
             {
-                if (curr.time - beatEmitters[i - 1].time < timeToReact)
+                if (curr.time - beatEmitters[i - 1].time < windUpTime)
                 {
-                    time = beatEmitters[i - 1].time * 0.9;
+                    windUpSigTime = beatEmitters[i - 1].time + ((beatEmitters[i].time - beatEmitters[i - 1].time) * 0.1);
+                    
                 }
                 else
                 {
-                    time = curr.time - timeToReact;
+                    windUpSigTime = curr.time - windUpTime;
                 }
             }
             else
             {
-                time = curr.time - timeToReact;
+                windUpSigTime = curr.time - windUpTime;
             }
             switch (curr.action)
             {
                 case "eAttack":
-                    timelineAsset.GetOutputTrack(2).CreateMarker<EnemyWindUpSignal>(time);
+                    timelineAsset.GetOutputTrack(2).CreateMarker<EnemyWindUpSignal>(windUpSigTime).name = "EnemyWindUpSignal :" + curr.beatNb;
+                    //timelineAsset.GetOutputTrack(2).CreateMarker<EnemyAttackSignal>(curr.time - timeToReact / 2).name = "EnemyAttackSignal :" + curr.beatNb;
                     break;
                 default:
                     Debug.Log("No actions recognized for marker at time :" + curr.time);
