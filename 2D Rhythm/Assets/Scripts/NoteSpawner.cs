@@ -18,20 +18,24 @@ public class NoteSpawner : MonoBehaviour
         playableDirector = gameObject.GetComponent<PlayableDirector>();
 
         TimelineAsset timelineAsset = playableDirector.playableAsset as TimelineAsset;
-        IMarker[] markers = timelineAsset.GetOutputTrack(1).GetMarkers().ToArray();
-        
-        
+        IMarker[] beatMarkers = timelineAsset.GetOutputTrack(1).GetMarkers().ToArray();
+        IMarker[] otherMarkers = timelineAsset.GetOutputTrack(2).GetMarkers().ToArray();
+
+
         List<BeatEmitter> beatEmitters = new List<BeatEmitter>();
         
-        foreach(IMarker marker in markers)
+        foreach(IMarker marker in beatMarkers)
+        {
+            if (marker is BeatEmitter)
+            {
+                beatEmitters.Add((BeatEmitter)marker);
+            }
+        }
+        foreach(IMarker marker in otherMarkers)
         {
             if (marker is EnemyWindUpSignal || marker is EnemyAttackSignal)
             {
-                timelineAsset.GetOutputTrack(1).DeleteMarker(marker);
-            }
-            else if (marker is BeatEmitter)
-            {
-                beatEmitters.Add((BeatEmitter)marker);
+                timelineAsset.GetOutputTrack(2).DeleteMarker(marker);
             }
         }
 
@@ -59,7 +63,7 @@ public class NoteSpawner : MonoBehaviour
             switch (curr.action)
             {
                 case "eAttack":
-                    timelineAsset.GetOutputTrack(1).CreateMarker<EnemyWindUpSignal>(time);
+                    timelineAsset.GetOutputTrack(2).CreateMarker<EnemyWindUpSignal>(time);
                     break;
                 default:
                     Debug.Log("No actions recognized for marker at time :" + curr.time);

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAttack : MonoBehaviour
+public class EnemyBehavior : MonoBehaviour
 {
     private SpriteRenderer sr;
     public Sprite idleSprite;
@@ -13,6 +13,11 @@ public class EnemyAttack : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         sr.sprite = idleSprite;
+    }
+
+    public void windUp()
+    {
+
     }
 
     public void attack()
