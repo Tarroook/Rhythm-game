@@ -8,8 +8,8 @@ using UnityEngine.Timeline;
 public class NoteSpawner : MonoBehaviour
 {
     private PlayableDirector playableDirector;
-    private float windUpTime = 1f;
-    private float timeToReact = .3f;
+    private float windUpTime = 1f; // this should be in bps
+    private float timeToReact = .3f; // this is in seconds
 
 
 
