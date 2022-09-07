@@ -8,17 +8,24 @@ public class NoteReceiver : MonoBehaviour, INotificationReceiver
 {
 
     public UnityEvent onWindUpSignal;
+    public UnityEvent onAttackSignal;
 
     private void Awake()
     {
         if (onWindUpSignal == null)
             onWindUpSignal = new UnityEvent();
+        if (onAttackSignal == null)
+            onAttackSignal = new UnityEvent();
     }
     public void OnNotify(Playable origin, INotification notification, object context)
     {
-        if(notification is EnemyWindUpSignal sig) // do this so it doesn't react to all signals
+        if(notification is EnemyWindUpSignal ewu) // do this so it doesn't react to all signals
         {
             onWindUpSignal.Invoke();
+        }
+        if (notification is EnemyAttackSignal ea) // do this so it doesn't react to all signals
+        {
+            onAttackSignal.Invoke();
         }
     }
 }

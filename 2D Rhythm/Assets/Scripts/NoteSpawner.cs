@@ -48,27 +48,24 @@ public class NoteSpawner : MonoBehaviour
         {
             BeatEmitter curr = beatEmitters[i];
             curr.beatNb = ++count;
+            windUpSigTime = curr.time - windUpTime;
+            attackSigTime = curr.time - timeToReact / 2;
             if (i > 0)
             {
                 if (curr.time - beatEmitters[i - 1].time < windUpTime)
                 {
-                    windUpSigTime = beatEmitters[i - 1].time + ((beatEmitters[i].time - beatEmitters[i - 1].time) * 0.1);
-                    
+                    windUpSigTime = beatEmitters[i - 1].time + ((curr.time - beatEmitters[i - 1].time) * 0.1);
+                    if (curr.time - windUpSigTime < timeToReact)
+                    {
+                        attackSigTime = windUpSigTime + ((curr.time - windUpTime) * 0.1);
+                    }
                 }
-                else
-                {
-                    windUpSigTime = curr.time - windUpTime;
-                }
-            }
-            else
-            {
-                windUpSigTime = curr.time - windUpTime;
             }
             switch (curr.action)
             {
                 case "eAttack":
                     timelineAsset.GetOutputTrack(2).CreateMarker<EnemyWindUpSignal>(windUpSigTime).name = "EnemyWindUpSignal :" + curr.beatNb;
-                    //timelineAsset.GetOutputTrack(2).CreateMarker<EnemyAttackSignal>(curr.time - timeToReact / 2).name = "EnemyAttackSignal :" + curr.beatNb;
+                    timelineAsset.GetOutputTrack(2).CreateMarker<EnemyAttackSignal>(attackSigTime).name = "EnemyAttackSignal :" + curr.beatNb;
                     break;
                 default:
                     Debug.Log("No actions recognized for marker at time :" + curr.time);
