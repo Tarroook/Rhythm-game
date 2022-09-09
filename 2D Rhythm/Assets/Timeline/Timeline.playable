@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8867147997299405248
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bd4ad4353df44d4eacc5f07bb434534, type: 3}
+  m_Name: EnemyAttackSignal :2
+  m_EditorClassIdentifier: 
+  m_Time: 1.196637932062149
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 0}
+  offset: 0.09000000000000008
 --- !u!114 &-8790216581932802326
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -36,7 +53,7 @@ MonoBehaviour:
   m_Asset: {fileID: 0}
   action: eAttack
   beatNb: 2
---- !u!114 &-6253979917872973083
+--- !u!114 &-5575141245910806643
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,7 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef7ed0f0ea13b4a47ab09603e227ce9e, type: 3}
   m_Name: EnemyWindUpSignal :1
   m_EditorClassIdentifier: 
-  m_Time: 0.1499999999999999
+  m_Time: 0.6327586412429809
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 0}
@@ -75,10 +92,10 @@ MonoBehaviour:
   m_Clips: []
   m_Markers:
     m_Objects:
-    - {fileID: -6253979917872973083}
-    - {fileID: 7115176606927577022}
-    - {fileID: 4744146586843248851}
-    - {fileID: 5248718913231066880}
+    - {fileID: -5575141245910806643}
+    - {fileID: 2209440241210416942}
+    - {fileID: 1026202589384101960}
+    - {fileID: -8867147997299405248}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,6 +118,39 @@ MonoBehaviour:
     m_ScenePreview: 1
   m_DurationMode: 0
   m_MarkerTrack: {fileID: 6446305163800174924}
+--- !u!114 &1026202589384101960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7ed0f0ea13b4a47ab09603e227ce9e, type: 3}
+  m_Name: EnemyWindUpSignal :2
+  m_EditorClassIdentifier: 
+  m_Time: 1.16
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 0}
+--- !u!114 &2209440241210416942
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bd4ad4353df44d4eacc5f07bb434534, type: 3}
+  m_Name: EnemyAttackSignal :1
+  m_EditorClassIdentifier: 
+  m_Time: 0.9999999940395354
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 0}
+  offset: 0
 --- !u!114 &3600246199045673962
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -118,38 +168,6 @@ MonoBehaviour:
   m_bufferingTime: 0.1
   m_ClipProperties:
     volume: 1
---- !u!114 &4744146586843248851
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef7ed0f0ea13b4a47ab09603e227ce9e, type: 3}
-  m_Name: EnemyWindUpSignal :2
-  m_EditorClassIdentifier: 
-  m_Time: 1.16
-  m_Retroactive: 0
-  m_EmitOnce: 0
-  m_Asset: {fileID: 0}
---- !u!114 &5248718913231066880
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bd4ad4353df44d4eacc5f07bb434534, type: 3}
-  m_Name: EnemyAttackSignal :2
-  m_EditorClassIdentifier: 
-  m_Time: 1.1849999999999998
-  m_Retroactive: 0
-  m_EmitOnce: 0
-  m_Asset: {fileID: 0}
 --- !u!114 &6104380219004623983
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -243,8 +261,6 @@ MonoBehaviour:
   m_Markers:
     m_Objects:
     - {fileID: -7152476733039637423}
-    - {fileID: 6389689203536606118}
-    - {fileID: -9207270474739445120}
     - {fileID: -8790216581932802326}
   m_TrackProperties:
     volume: 1
@@ -273,19 +289,3 @@ MonoBehaviour:
   m_Clips: []
   m_Markers:
     m_Objects: []
---- !u!114 &7115176606927577022
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bd4ad4353df44d4eacc5f07bb434534, type: 3}
-  m_Name: EnemyAttackSignal :1
-  m_EditorClassIdentifier: 
-  m_Time: 0.9999999940395354
-  m_Retroactive: 0
-  m_EmitOnce: 0
-  m_Asset: {fileID: 0}

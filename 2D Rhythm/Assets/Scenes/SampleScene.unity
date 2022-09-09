@@ -490,7 +490,7 @@ MonoBehaviour:
       - m_Target: {fileID: 184190631}
         m_TargetAssemblyTypeName: EnemyBehavior, Assembly-CSharp
         m_MethodName: attack
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -613,6 +613,10 @@ PrefabInstance:
     - target: {fileID: 8602562349007007590, guid: 6255a15e32bd61740ac8d69bd464fcc7, type: 3}
       propertyPath: m_Name
       value: Test music 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8602562349007007613, guid: 6255a15e32bd61740ac8d69bd464fcc7, type: 3}
+      propertyPath: bpm
+      value: 116
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6255a15e32bd61740ac8d69bd464fcc7, type: 3}
