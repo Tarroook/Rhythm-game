@@ -7,6 +7,8 @@ public class EnemyBehavior : MonoBehaviour
     private SpriteRenderer sr;
     public Sprite idleSprite;
     public Sprite attackSprite;
+    public bool isAttacking;
+    public float phase = 0; 
 
     // Start is called before the first frame update
     void Start()
@@ -24,11 +26,15 @@ public class EnemyBehavior : MonoBehaviour
     public void attack(double startTime)
     {
         sr.color = new Color(1, 0, 0, 1);
+        StartCoroutine(attackLoop(startTime));
         Debug.Log("Enemy has attacked");
     }
 
-    IEnumerator attackLoop()
+    IEnumerator attackLoop(double startTime) //miss->good->perfect->good->miss
     {
-        yield return new WaitForSeconds(1f);
+        isAttacking = true;
+        phase = 1;
+        double waitTime = startTime;
+        yield return new WaitForSeconds((float)waitTime);
     }
 }
