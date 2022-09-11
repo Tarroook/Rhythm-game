@@ -21,7 +21,8 @@ public class EnemyBehavior : MonoBehaviour
     {
         Debug.Log("Enemy winds up");
         sr.color = new Color(1, 0.92f, 0.016f, 1);
-    }
+        phase = 1;
+    }// maybe make an event at beginning and end of an attack so player can't press more than once per attackEvent ?
 
     public void attack(double startTime)
     {
@@ -33,7 +34,6 @@ public class EnemyBehavior : MonoBehaviour
     IEnumerator attackLoop(double startTime) //first miss start as long as enemy is in windup : miss->good->perfect->good->miss
     {
         isAttacking = true;
-        phase = 1;
         double waitTime = startTime;
         yield return new WaitForSeconds((float)waitTime);
     }
