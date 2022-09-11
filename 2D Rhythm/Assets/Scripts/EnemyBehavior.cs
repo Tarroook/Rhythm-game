@@ -8,7 +8,7 @@ public class EnemyBehavior : MonoBehaviour
     public Sprite idleSprite;
     public Sprite attackSprite;
     public bool isAttacking;
-    public float phase = 0; 
+    public float phase = 0; // 0 = not attacking; 1 = miss; 2 = good; 3 = perfect
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +30,7 @@ public class EnemyBehavior : MonoBehaviour
         Debug.Log("Enemy has attacked");
     }
 
-    IEnumerator attackLoop(double startTime) //miss->good->perfect->good->miss
+    IEnumerator attackLoop(double startTime) //first miss start as long as enemy is in windup : miss->good->perfect->good->miss
     {
         isAttacking = true;
         phase = 1;

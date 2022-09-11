@@ -8,36 +8,52 @@ using UnityEngine.Timeline;
 public class NoteSpawner : MonoBehaviour
 {
     private PlayableDirector playableDirector;
-    public float bpm;
-    private float bps;
-    [SerializeField]private float windUpTime; // this is in bps
-    private float timeToReact = .3f; // this is in seconds
-
+    private MusicList musicList;
+    private MusicData currMusicData;
+    private InputManager inputManager;
+    private int currDifficulty;
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        bps = 1 / (bpm / 60);
-        windUpTime = 1 * bps;
-
         playableDirector = gameObject.GetComponent<PlayableDirector>();
+        musicList = gameObject.GetComponent<MusicList>();
+        inputManager = GameObject.FindGameObjectWithTag("Player").GetComponent<InputManager>();
+        setMusic("Harlem Shuffle", 0);
+    }
 
-        TimelineAsset timelineAsset = playableDirector.playableAsset as TimelineAsset;
+    public void startPlaying()
+    {
+        playableDirector.Play();
+    }
+
+    public void setMusic(string musicName, int difficulty)
+    {
+        currMusicData = musicList.getMusicFromName(musicName);
+        currDifficulty = difficulty;
+        Debug.Log("set Music");
+        playableDirector.playableAsset = currMusicData.timeline[currDifficulty];
+        setSignals();
+    }
+
+    public void setSignals()
+    {
+        TimelineAsset timelineAsset = currMusicData.timeline[currDifficulty];
         IMarker[] beatMarkers = timelineAsset.GetOutputTrack(1).GetMarkers().ToArray();
         IMarker[] otherMarkers = timelineAsset.GetOutputTrack(2).GetMarkers().ToArray();
 
 
         List<BeatEmitter> beatEmitters = new List<BeatEmitter>();
-        
-        foreach(IMarker marker in beatMarkers)
+
+        foreach (IMarker marker in beatMarkers)
         {
             if (marker is BeatEmitter)
             {
                 beatEmitters.Add((BeatEmitter)marker);
             }
         }
-        foreach(IMarker marker in otherMarkers)
+        foreach (IMarker marker in otherMarkers)
         {
             if (marker is EnemyWindUpSignal || marker is EnemyAttackSignal)
             {
@@ -47,22 +63,25 @@ public class NoteSpawner : MonoBehaviour
 
         beatEmitters.Sort(VariousMethods.sortByTime);
         int count = 0;
+        float windUpTime;
         double windUpSigTime;
+
         double attackSigTime;
         double attackSigOffset;
         for (int i = 0; i < beatEmitters.Count; i++)
         {
             BeatEmitter curr = beatEmitters[i];
             curr.beatNb = ++count;
+            windUpTime = curr.timeToReact * currMusicData.getBps();
             windUpSigTime = curr.time - windUpTime;
-            attackSigTime = curr.time - timeToReact / 2;
+            attackSigTime = curr.time - inputManager.timeToPress / 2;
             attackSigOffset = 0;
             if (i > 0)
             {
                 if (curr.time - beatEmitters[i - 1].time < windUpTime)
                 {
                     windUpSigTime = beatEmitters[i - 1].time + ((curr.time - beatEmitters[i - 1].time) * 0.1);
-                    if (curr.time - windUpSigTime < timeToReact)
+                    if (curr.time - windUpSigTime < inputManager.timeToPress)
                     {
                         attackSigTime = windUpSigTime + ((curr.time - windUpTime) * 0.05);
                         attackSigOffset = curr.time - windUpSigTime;

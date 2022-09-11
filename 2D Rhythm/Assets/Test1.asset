@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a79e7a7297286a45a2ac3567ded0faa, type: 3}
+  m_Name: Test1
+  m_EditorClassIdentifier: 
+  name: Harlem Shuffle
+  bpm: 116
+  timeline:
+  - {fileID: 11400000, guid: 9dc2d5fd777af6c41b88c33225923da6, type: 2}
