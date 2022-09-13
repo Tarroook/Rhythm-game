@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8602562349007007590
+--- !u!1 &5872974320328453418
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,25 +8,27 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8602562349007007584}
-  - component: {fileID: 8602562349007007585}
-  - component: {fileID: 8602562349007007587}
-  - component: {fileID: 8602562349007007586}
-  - component: {fileID: 8602562349007007613}
+  - component: {fileID: 5872974320328453421}
+  - component: {fileID: 5872974320328453423}
+  - component: {fileID: 5872974320328453422}
+  - component: {fileID: 5872974320328453416}
+  - component: {fileID: 5872974320328453417}
+  - component: {fileID: 5872974320328453419}
+  - component: {fileID: 5872974320328453420}
   m_Layer: 0
-  m_Name: Test music 1
+  m_Name: Music Director
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8602562349007007584
+--- !u!4 &5872974320328453421
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8602562349007007590}
+  m_GameObject: {fileID: 5872974320328453418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.1405963, y: -0.6288184, z: -0.5617259}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -34,36 +36,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!320 &8602562349007007585
+--- !u!320 &5872974320328453423
 PlayableDirector:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8602562349007007590}
+  m_GameObject: {fileID: 5872974320328453418}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 9dc2d5fd777af6c41b88c33225923da6, type: 2}
-  m_InitialState: 1
+  m_PlayableAsset: {fileID: 0}
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 0
   m_InitialTime: 0
   m_SceneBindings:
   - key: {fileID: 6104380219004623983, guid: 9dc2d5fd777af6c41b88c33225923da6, type: 2}
-    value: {fileID: 8602562349007007587}
+    value: {fileID: 5872974320328453422}
   - key: {fileID: 6446305163800174924, guid: 9dc2d5fd777af6c41b88c33225923da6, type: 2}
-    value: {fileID: 8602562349007007590}
+    value: {fileID: 5872974320328453418}
   - key: {fileID: -1857631697110365695, guid: 9dc2d5fd777af6c41b88c33225923da6, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 5872974320328453416}
   m_ExposedReferences:
     m_References: []
---- !u!82 &8602562349007007587
+--- !u!82 &5872974320328453422
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8602562349007007590}
+  m_GameObject: {fileID: 5872974320328453418}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -153,13 +155,13 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8602562349007007586
+--- !u!114 &5872974320328453416
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8602562349007007590}
+  m_GameObject: {fileID: 5872974320328453418}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
@@ -167,15 +169,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Events:
     m_Signals:
-    - {fileID: 11400000, guid: 0b9ad4a2d1e2be440add77ffa84b01ba, type: 2}
-    - {fileID: 11400000, guid: 8b562d64356be4f4ab94797a174ce563, type: 2}
-    - {fileID: 11400000, guid: d9d4dc5e5b6a50c4e8ee5b13147ba8b3, type: 2}
+    - {fileID: 11400000, guid: 0c50021d011151f4db99b2430e65cae7, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: EnemyAttack, Assembly-CSharp
-          m_MethodName: attack
+        - m_Target: {fileID: 5872974320328453417}
+          m_TargetAssemblyTypeName: MusicManager, Assembly-CSharp
+          m_MethodName: songStarted
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -185,31 +185,72 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    - m_PersistentCalls:
-        m_Calls: []
-    - m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 8602562349007007590}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &8602562349007007613
+--- !u!114 &5872974320328453417
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8602562349007007590}
+  m_GameObject: {fileID: 5872974320328453418}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1480fe3780a009c46a75b5758fa2d3a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  test: 0
+--- !u!114 &5872974320328453419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5872974320328453418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c8fa23e6127e4b499755a86d00a2b62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicDatas:
+  - {fileID: 11400000, guid: 651b3b13ae8ab124bbaa9266fd11673f, type: 2}
+--- !u!114 &5872974320328453420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5872974320328453418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6870bb9db87bace48ae1677512e660f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onWindUpSignal:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: EnemyBehavior, Assembly-CSharp
+        m_MethodName: windUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onAttackSignal:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: EnemyBehavior, Assembly-CSharp
+        m_MethodName: attack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

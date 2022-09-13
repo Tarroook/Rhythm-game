@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
-public class NoteSpawner : MonoBehaviour
+public class MusicManager : MonoBehaviour
 {
     private PlayableDirector playableDirector;
     private MusicList musicList;
     private MusicData currMusicData;
     private InputManager inputManager;
     private int currDifficulty;
+    public UnityEvent beatEvent;
+    private IEnumerator beatLoop;
 
 
     // Start is called before the first frame update
@@ -20,12 +23,19 @@ public class NoteSpawner : MonoBehaviour
         playableDirector = gameObject.GetComponent<PlayableDirector>();
         musicList = gameObject.GetComponent<MusicList>();
         inputManager = GameObject.FindGameObjectWithTag("Player").GetComponent<InputManager>();
+        beatEvent = new UnityEvent();
+        beatLoop = BeatLoop();
         setMusic("Harlem Shuffle", 0);
     }
 
     public void startPlaying()
     {
         playableDirector.Play();
+    }
+
+    public void songStarted()
+    {
+        StartCoroutine(beatLoop);
     }
 
     public void setMusic(string musicName, int difficulty)
@@ -98,6 +108,18 @@ public class NoteSpawner : MonoBehaviour
                     Debug.Log("No actions recognized for marker at time :" + curr.time);
                     break;
             }
+        }
+    }
+
+    IEnumerator BeatLoop() // needs to be started by event
+    {
+        float bps = currMusicData.getBps();
+        int count = 0;
+        while (true)
+        {
+            beatEvent.Invoke();
+            Debug.Log("Beat : " + count++);
+            yield return new WaitForSeconds(bps);
         }
     }
 }
