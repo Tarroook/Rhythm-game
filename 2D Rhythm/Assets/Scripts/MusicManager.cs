@@ -10,7 +10,7 @@ public class MusicManager : MonoBehaviour
 {
     private PlayableDirector playableDirector;
     private MusicList musicList;
-    private MusicData currMusicData;
+    public MusicData currMusicData;
     private InputManager inputManager;
     private int currDifficulty;
     public UnityEvent beatEvent;
@@ -114,11 +114,11 @@ public class MusicManager : MonoBehaviour
     IEnumerator BeatLoop() // needs to be started by event
     {
         float bps = currMusicData.getBps();
-        int count = 0;
+        //int count = 0;
         while (true)
         {
             beatEvent.Invoke();
-            Debug.Log("Beat : " + count++);
+            //Debug.Log("Beat : " + count++);
             yield return new WaitForSeconds(bps);
         }
     }

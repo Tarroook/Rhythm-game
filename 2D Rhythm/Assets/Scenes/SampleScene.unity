@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 184190634}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -253,6 +253,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Music Director
       objectReference: {fileID: 0}
+    - target: {fileID: 5872974320328453418, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: m_TagString
+      value: Music Director
+      objectReference: {fileID: 0}
     - target: {fileID: 5872974320328453420, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
       propertyPath: onAttackSignal.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -347,7 +351,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToPress: 0.3
-  button: Vertical
+  attackButton: Vertical
+  dodgeRightButton: 
+  dodgeLeftButton: 
+  dodgeBackButton: 
   idleSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   attackSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!212 &359254517
