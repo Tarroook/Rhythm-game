@@ -7,7 +7,7 @@ public class EnemyBehavior : MonoBehaviour
     private SpriteRenderer sr;
     public Sprite idleSprite;
     public Sprite attackSprite;
-    public bool isAttacking;
+    public bool isAttacking = false;
     public float phase = 0; // 0 = not attacking; 1 = miss; 2 = good; 3 = perfect
     private InputManager inputManager;
 
@@ -22,6 +22,7 @@ public class EnemyBehavior : MonoBehaviour
     public void windUp()
     {
         Debug.Log("Enemy winds up");
+        isAttacking = true;
         sr.color = new Color(1, 0.92f, 0.016f, 1);
         phase = 1;
     }// maybe make an event at beginning and end of an attack so player can't press more than once per attackEvent ?
@@ -29,11 +30,11 @@ public class EnemyBehavior : MonoBehaviour
     public void attack(double startTime)
     {
         
-        StartCoroutine(attackLoop(startTime));
+        StartCoroutine(vulnerableLoop(startTime));
         //Debug.Log("Enemy has attacked");
     }
 
-    IEnumerator attackLoop(double startTime) //first miss start as long as enemy is in windup : miss->good->perfect->good->miss
+    IEnumerator vulnerableLoop(double startTime) //first miss start as long as enemy is in windup : miss->good->perfect->good->miss
     {
         phase = 2;
         sr.color = new Color(1, 0.5f, 0.016f, 1);
@@ -52,6 +53,7 @@ public class EnemyBehavior : MonoBehaviour
         //Debug.Log("phase = Miss");
         yield return waitForNextPhase(startTime);
         sr.color = new Color(1, 1, 1, 1);
+        isAttacking = false;
         phase = 0;
     }
 

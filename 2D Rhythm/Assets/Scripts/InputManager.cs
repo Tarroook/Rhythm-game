@@ -5,20 +5,23 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     private SpriteRenderer sr;
-    public float timeToPress = .3f; // 1/3 && 3/3 = good; 2/3 = perfect; 4/3 = miss (in seconds)
+    public float timeToPress = .5f; // 1/3 && 3/3 = good; 2/3 = perfect; 4/3 = miss (in seconds)
     public string attackButton;
     public string dodgeRightButton;
     public string dodgeLeftButton;
     public string dodgeBackButton;
-    public Sprite idleSprite;
-    public Sprite attackSprite;
     private EnemyBehavior enemybh;
+    private MusicManager musicManager;
 
 
     private void Start()
     {
-        sr = GetComponent<SpriteRenderer>();
+        Debug.Log("test");
+        sr = GetComponent<SpriteRenderer>(); 
+        musicManager = GameObject.FindGameObjectWithTag("Music Director").GetComponent<MusicManager>();
         enemybh = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyBehavior>();
+        if (enemybh == null)
+            Debug.Log("wtf");
     }
 
     private void Update()
@@ -30,23 +33,27 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetButtonDown(attackButton))
         {
-            switch (enemybh.phase)
+            if (enemybh.isAttacking)
             {
-                case 0: // enemy not attacking
-                    Debug.Log("Player attacked while enemy is not attacking");
-                    break;
-                case 1: // miss
-                    Debug.Log("Player missed");
-                    break;
-                case 2: // good
-                    Debug.Log("Player attacked good");
-                    break;
-                case 3: // perfect
-                    Debug.Log("Player attacked perfect");
-                    break;
-                default:
-                    Debug.Log("Enemy phase is wrong");
-                    break;
+                switch (enemybh.phase)
+                {
+                    case 0: // enemy not attacking
+                        Debug.Log("Player attacked while enemy is not attacking");
+                        break;
+                    case 1: // miss
+                        Debug.Log("Player missed");
+                        break;
+                    case 2: // good
+                        Debug.Log("Player attacked good");
+                        Instantiate(musicManager.currMusicData.environment.goodTimingParticle);
+                        break;
+                    case 3: // perfect
+                        Debug.Log("Player attacked perfect");
+                        break;
+                    default:
+                        Debug.Log("Enemy phase is wrong");
+                        break;
+                }
             }
         }
         else if (Input.GetButtonUp(attackButton))
