@@ -16,12 +16,9 @@ public class InputManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("test");
         sr = GetComponent<SpriteRenderer>(); 
         musicManager = GameObject.FindGameObjectWithTag("Music Director").GetComponent<MusicManager>();
         enemybh = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyBehavior>();
-        if (enemybh == null)
-            Debug.Log("wtf");
     }
 
     private void Update()
