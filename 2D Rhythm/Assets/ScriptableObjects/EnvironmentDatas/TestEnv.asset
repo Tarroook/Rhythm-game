@@ -15,5 +15,5 @@ MonoBehaviour:
   playerSprite: {fileID: 0}
   enemySprite: {fileID: 0}
   missTimingParticle: {fileID: 0}
-  goodTimingParticle: {fileID: 3534436662544242747, guid: ac66cb1b8561b3e469c37853dc73b69a, type: 3}
+  goodTimingParticle: {fileID: 3534436662544242749, guid: ac66cb1b8561b3e469c37853dc73b69a, type: 3}
   perfectTimingParticle: {fileID: 0}

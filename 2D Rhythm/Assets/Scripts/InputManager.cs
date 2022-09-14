@@ -5,7 +5,7 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     private SpriteRenderer sr;
-    public float timeToPress = .5f; // 1/3 && 3/3 = good; 2/3 = perfect; 4/3 = miss (in seconds)
+    public float timeToPress = .4f; // 1/3 && 3/3 = good; 2/3 = perfect; 4/3 = miss (in seconds)
     public string attackButton;
     public string dodgeRightButton;
     public string dodgeLeftButton;
@@ -45,7 +45,8 @@ public class InputManager : MonoBehaviour
                         break;
                     case 2: // good
                         Debug.Log("Player attacked good");
-                        Instantiate(musicManager.currMusicData.environment.goodTimingParticle);
+                        ParticleSystem goodParticle = musicManager.currMusicData.environment.goodTimingParticle;
+                        Instantiate(goodParticle, new Vector2(transform.position.x, transform.position.y), goodParticle.transform.rotation);
                         break;
                     case 3: // perfect
                         Debug.Log("Player attacked perfect");

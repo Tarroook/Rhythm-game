@@ -351,12 +351,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToPress: 0.3
-  attackButton: Vertical
-  dodgeRightButton: 
-  dodgeLeftButton: 
-  dodgeBackButton: 
-  idleSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  attackSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  attackButton: Attack Forward
+  dodgeRightButton: Dodge Right
+  dodgeLeftButton: Dodge Left
+  dodgeBackButton: Dodge Back
 --- !u!212 &359254517
 SpriteRenderer:
   m_ObjectHideFlags: 0
