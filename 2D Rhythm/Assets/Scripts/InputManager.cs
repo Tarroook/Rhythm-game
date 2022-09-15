@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    private SpriteRenderer sr;
+    protected SpriteRenderer sr;
     public float timeToPress = .4f; // 1/3 && 3/3 = good; 2/3 = perfect; 4/3 = miss (in seconds)
     public string attackButton;
     public string dodgeRightButton;
@@ -12,52 +12,79 @@ public class InputManager : MonoBehaviour
     public string dodgeBackButton;
     private EnemyBehavior enemybh;
     private MusicManager musicManager;
-    private int attacksLeft;
+    public List<InputReact> nextInputs;
 
+
+    private void OnDisable()
+    {
+        EnemyBehavior.onWindUp -= addAttackReact;
+        foreach(InputReact ir in nextInputs)
+        {
+            ir.onTimeOver -= removeReact;
+        }
+    }
 
     private void Start()
     {
         sr = GetComponent<SpriteRenderer>(); 
         musicManager = GameObject.FindGameObjectWithTag("Music Director").GetComponent<MusicManager>();
         enemybh = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyBehavior>();
-        attacksLeft = 0;
+        nextInputs = new List<InputReact>();
+        EnemyBehavior.onWindUp += addAttackReact;
     }
 
     private void Update()
     {
-        attackPress();
+        if (nextInputs.Count == 0)
+            return;
+        InputReact ir = nextInputs[0];
+        if (ir is AttackReact)
+            attackPress(ir as AttackReact);
     }
 
-    public void attackPress()
+    private void addAttackReact(AttackReact ar)
+    {
+        nextInputs.Add(ar);
+        ar.onTimeOver += removeReact;
+    }
+
+    private void removeReact(InputReact ir)
+    {
+        nextInputs.Remove(ir);
+        ir.onTimeOver -= removeReact;
+        Destroy(ir);
+    }
+
+    public void attackPress(AttackReact ar)
     {
         if (Input.GetButtonDown(attackButton))
         {
-            if (attacksLeft > 0) 
+            switch (ar.phase)
             {
-                switch (enemybh.phase)
-                {
-                    case 0: // enemy not attacking
-                        Debug.Log("Player attacked while enemy is not attacking");
-                        break;
-                    case 1: // miss
-                        Debug.Log("Player missed");
-                        ParticleSystem missParticle = musicManager.currMusicData.environment.missTimingParticle;
-                        Instantiate(missParticle, new Vector2(transform.position.x, transform.position.y), missParticle.transform.rotation);
-                        break;
-                    case 2: // good
-                        Debug.Log("Player attacked good");
-                        ParticleSystem goodParticle = musicManager.currMusicData.environment.goodTimingParticle;
-                        Instantiate(goodParticle, new Vector2(transform.position.x, transform.position.y), goodParticle.transform.rotation);
-                        break;
-                    case 3: // perfect
-                        Debug.Log("Player attacked perfect");
-                        ParticleSystem perfParticle = musicManager.currMusicData.environment.perfectTimingParticle;
-                        Instantiate(perfParticle, new Vector2(transform.position.x, transform.position.y), perfParticle.transform.rotation);
-                        break;
-                    default:
-                        Debug.Log("Enemy phase is wrong");
-                        break;
-                }
+                case 0: // enemy not attacking
+                    Debug.Log("Player attacked while enemy is not attacking");
+                    break;
+                case 1: // miss
+                    Debug.Log("Player missed");
+                    ParticleSystem missParticle = musicManager.currMusicData.environment.missTimingParticle;
+                    Instantiate(missParticle, new Vector2(transform.position.x, transform.position.y), missParticle.transform.rotation);
+                    removeReact(ar);
+                    break;
+                case 2: // good
+                    Debug.Log("Player attacked good");
+                    ParticleSystem goodParticle = musicManager.currMusicData.environment.goodTimingParticle;
+                    Instantiate(goodParticle, new Vector2(transform.position.x, transform.position.y), goodParticle.transform.rotation);
+                    removeReact(ar);
+                    break;
+                case 3: // perfect
+                    Debug.Log("Player attacked perfect");
+                    ParticleSystem perfParticle = musicManager.currMusicData.environment.perfectTimingParticle;
+                    Instantiate(perfParticle, new Vector2(transform.position.x, transform.position.y), perfParticle.transform.rotation);
+                    removeReact(ar);
+                    break;
+                default:
+                    Debug.Log("Enemy phase is wrong");
+                    break;
             }
         }
         else if (Input.GetButtonUp(attackButton))

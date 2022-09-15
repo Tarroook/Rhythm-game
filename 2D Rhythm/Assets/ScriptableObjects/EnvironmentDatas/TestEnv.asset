@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSprite: {fileID: 0}
   enemySprite: {fileID: 0}
-  missTimingParticle: {fileID: 0}
+  missTimingParticle: {fileID: 6738599940474110140, guid: 621c272d02ea85e47b8ecd20ff67f57e, type: 3}
   goodTimingParticle: {fileID: 3534436662544242749, guid: ac66cb1b8561b3e469c37853dc73b69a, type: 3}
-  perfectTimingParticle: {fileID: 0}
+  perfectTimingParticle: {fileID: 8691161994572156531, guid: 4664f02325f43c14693da77317c7b922, type: 3}
