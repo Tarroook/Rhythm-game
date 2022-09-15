@@ -2,46 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBehavior : MonoBehaviour
+public class AttackReact : MonoBehaviour
 {
+
+    public float phase = 1; // 0 = not attacking; 1 = miss; 2 = good; 3 = perfect
     private SpriteRenderer sr;
-    public Sprite idleSprite;
-    public Sprite attackSprite;
-    public bool isAttacking = false;
-    public float phase = 0; // 0 = not attacking; 1 = miss; 2 = good; 3 = perfect
+    public bool canPress = true;
     private InputManager inputManager;
-    public delegate void windUpAction(AttackReact attackReact);
-    public static event windUpAction onWindUp;
-    public delegate void attackAction(double startTime);
-    public static event attackAction onAttack;
+    public delegate void attackOver(AttackReact thisToDelete);
+    public event attackOver onAttackOver;
+    private bool isStarted = false;
 
-    // Start is called before the first frame update
-    void Start()
+    public AttackReact(SpriteRenderer sr)
     {
-        sr = GetComponent<SpriteRenderer>();
         inputManager = GameObject.FindGameObjectWithTag("Player").GetComponent<InputManager>();
-        sr.color = new Color(1, 1, 1, 1);
+        this.sr = sr;
+        EnemyBehavior.onAttack += attack;
     }
 
-    public void windUp()
+    void attack(double startTime)
     {
-        StopCoroutine(vulnerableLoop(0));
-        Debug.Log("Enemy winds up");
-        if (onWindUp != null)
-            onWindUp(new AttackReact(sr));
-        sr.color = new Color(1, 0.92f, 0.016f, 1);
-        phase = 1;
-    }// maybe make an event at beginning and end of an attack so player can't press more than once per attackEvent ?
-
-    public void attack(double startTime)
-    {
-        if (onAttack != null)
-            onAttack(startTime);
+        EnemyBehavior.onAttack -= attack;
         StartCoroutine(vulnerableLoop(startTime));
-        // Debug.Log("Enemy has attacked");
     }
 
-    IEnumerator vulnerableLoop(double startTime) // first miss start as long as enemy is in windup : miss->good->perfect->good->miss
+    IEnumerator vulnerableLoop(double startTime) //first miss start as long as enemy is in windup : miss->good->perfect->good->miss
     {
         phase = 2;
         sr.color = new Color(1, 0.5f, 0.016f, 1);
@@ -60,8 +45,8 @@ public class EnemyBehavior : MonoBehaviour
         Debug.Log("phase = Miss");
         yield return waitForNextPhase(startTime);
         sr.color = new Color(1, 1, 1, 1);
-        isAttacking = false;
-        phase = 0;
+        if (onAttackOver != null)
+            onAttackOver(this);
     }
 
     IEnumerator waitForNextPhase(double startTime)

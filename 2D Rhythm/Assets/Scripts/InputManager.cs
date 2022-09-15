@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour
     public string dodgeBackButton;
     private EnemyBehavior enemybh;
     private MusicManager musicManager;
+    private int attacksLeft;
 
 
     private void Start()
@@ -19,6 +20,7 @@ public class InputManager : MonoBehaviour
         sr = GetComponent<SpriteRenderer>(); 
         musicManager = GameObject.FindGameObjectWithTag("Music Director").GetComponent<MusicManager>();
         enemybh = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyBehavior>();
+        attacksLeft = 0;
     }
 
     private void Update()
@@ -30,7 +32,7 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetButtonDown(attackButton))
         {
-            if (enemybh.isAttacking)
+            if (attacksLeft > 0) 
             {
                 switch (enemybh.phase)
                 {
@@ -39,6 +41,8 @@ public class InputManager : MonoBehaviour
                         break;
                     case 1: // miss
                         Debug.Log("Player missed");
+                        ParticleSystem missParticle = musicManager.currMusicData.environment.missTimingParticle;
+                        Instantiate(missParticle, new Vector2(transform.position.x, transform.position.y), missParticle.transform.rotation);
                         break;
                     case 2: // good
                         Debug.Log("Player attacked good");
@@ -47,6 +51,8 @@ public class InputManager : MonoBehaviour
                         break;
                     case 3: // perfect
                         Debug.Log("Player attacked perfect");
+                        ParticleSystem perfParticle = musicManager.currMusicData.environment.perfectTimingParticle;
+                        Instantiate(perfParticle, new Vector2(transform.position.x, transform.position.y), perfParticle.transform.rotation);
                         break;
                     default:
                         Debug.Log("Enemy phase is wrong");
