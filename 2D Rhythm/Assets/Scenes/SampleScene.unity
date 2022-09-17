@@ -249,6 +249,58 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5872974320328453417, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: beatEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872974320328453417, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: beatEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872974320328453417, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: beatEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872974320328453417, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: beatEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 359254520}
+    - target: {fileID: 5872974320328453417, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: beatEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 359254520}
+    - target: {fileID: 5872974320328453417, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: beatEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872974320328453417, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: beatEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872974320328453417, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: beatEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: beatAnimation
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872974320328453417, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: beatEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: test
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872974320328453417, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: beatEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SpriteAnimations, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872974320328453417, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: beatEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: SpriteAnimations, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872974320328453417, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: beatEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872974320328453417, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: beatEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5872974320328453418, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
       propertyPath: m_Name
       value: Music Director
@@ -257,6 +309,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Music Director
       objectReference: {fileID: 0}
+    - target: {fileID: 5872974320328453419, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: musicDatas.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872974320328453419, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: musicDatas.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 651b3b13ae8ab124bbaa9266fd11673f, type: 2}
     - target: {fileID: 5872974320328453420, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
       propertyPath: onAttackSignal.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -331,6 +391,7 @@ GameObject:
   - component: {fileID: 359254517}
   - component: {fileID: 359254519}
   - component: {fileID: 359254516}
+  - component: {fileID: 359254520}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -440,6 +501,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &359254520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 359254515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8feb1d37ebd37884a82467fff8b1e54a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &439345265
 GameObject:
   m_ObjectHideFlags: 0

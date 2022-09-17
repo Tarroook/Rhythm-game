@@ -13,7 +13,8 @@ public class MusicManager : MonoBehaviour
     public MusicData currMusicData;
     private InputManager inputManager;
     private int currDifficulty;
-    public UnityEvent beatEvent;
+    public delegate void beatAction();
+    public static event beatAction onBeat;
     private IEnumerator beatLoop;
 
 
@@ -23,7 +24,6 @@ public class MusicManager : MonoBehaviour
         playableDirector = gameObject.GetComponent<PlayableDirector>();
         musicList = gameObject.GetComponent<MusicList>();
         inputManager = GameObject.FindGameObjectWithTag("Player").GetComponent<InputManager>();
-        beatEvent = new UnityEvent();
         beatLoop = BeatLoop();
         setMusic("Harlem Shuffle", 0);
     }
@@ -114,11 +114,12 @@ public class MusicManager : MonoBehaviour
     IEnumerator BeatLoop() // needs to be started by event
     {
         float bps = currMusicData.getBps();
-        //int count = 0;
+        int count = 0;
         while (true)
         {
-            beatEvent.Invoke();
-            //Debug.Log("Beat : " + count++);
+            if (onBeat != null)
+                onBeat();
+            Debug.Log("Beat : " + count++);
             yield return new WaitForSeconds(bps);
         }
     }

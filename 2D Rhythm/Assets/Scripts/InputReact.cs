@@ -26,19 +26,19 @@ public class InputReact : MonoBehaviour
     {
         phase = 2;
         sr.color = new Color(1, 0.5f, 0.016f, 1);
-        Debug.Log("phase = Good");
+        //Debug.Log("phase = Good");
         yield return waitForNextPhase(startTime);
         phase = 3;
         sr.color = new Color(1, 0, 0, 1);
-        Debug.Log("phase = Perfect");
+        //Debug.Log("phase = Perfect");
         yield return waitForNextPhase(startTime);
         phase = 2;
         sr.color = new Color(1, 0.5f, 0.016f, 1);
-        Debug.Log("phase = Good");
+        //Debug.Log("phase = Good");
         yield return waitForNextPhase(startTime);
         phase = 1;
         sr.color = new Color(0, 1, 0, 1);
-        Debug.Log("phase = Miss");
+        //Debug.Log("phase = Miss");
         yield return waitForNextPhase(startTime);
         sr.color = new Color(1, 1, 1, 1);
         if (onTimeOver != null)
