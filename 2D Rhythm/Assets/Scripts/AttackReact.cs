@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class AttackReact : InputReact
 {
-    AttackInfo currAttackInfo;
-
+    public string[] directions;
     private void OnEnable()
     {
         EnemyBehavior.onAttack += attack;
@@ -16,11 +15,22 @@ public class AttackReact : InputReact
         EnemyBehavior.onAttack -= attack;
     }
 
-
-    void attack(AttackInfo attackInfo)
+    public void attack(double startTime)
     {
         EnemyBehavior.onAttack -= attack;
-        currAttackInfo = attackInfo;
-        StartCoroutine(vulnerableLoop(attackInfo.offset));
+        StartCoroutine(vulnerableLoop(startTime));
+    }
+
+    public bool hits(string direction)
+    {
+        foreach(string s in directions)
+        {
+            if(directions == null)
+                Debug.Log("null info");
+            
+            if (s.Equals(direction))
+                return true;
+        }
+        return false;
     }
 }

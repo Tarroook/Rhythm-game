@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class AttackInfoUnityEvent : UnityEvent<AttackInfo>
+public class StringArrayUnityEvent : UnityEvent<string[]>
 {
 
 }

@@ -5,11 +5,10 @@ using UnityEngine.Timeline;
 
 public class EnemyAttackSignal : SignalEmitter
 {
-    public AttackInfo attackInfo;
-    public void setData(string name, double offset, string[] dirr)
+    public double offset;
+    public void setData(string name, double offset)
     {
         this.name = name;
-        attackInfo.offset = offset;
-        attackInfo.direction = dirr;
+        this.offset = offset;
     }
 }

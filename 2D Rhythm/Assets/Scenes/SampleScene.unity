@@ -318,6 +318,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 651b3b13ae8ab124bbaa9266fd11673f, type: 2}
     - target: {fileID: 5872974320328453420, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: onAttackSignal.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872974320328453420, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: onWindUpSignal.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872974320328453420, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: onAttackSignal.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872974320328453420, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: onWindUpSignal.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872974320328453420, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
       propertyPath: onAttackSignal.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 184190631}
@@ -326,12 +342,36 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 184190631}
     - target: {fileID: 5872974320328453420, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: onAttackSignal.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872974320328453420, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: onWindUpSignal.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872974320328453420, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
       propertyPath: onAttackSignal.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: attack
       objectReference: {fileID: 0}
     - target: {fileID: 5872974320328453420, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
       propertyPath: onWindUpSignal.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: windUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872974320328453420, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: onAttackSignal.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: EnemyBehavior, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872974320328453420, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: onWindUpSignal.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: EnemyBehavior, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872974320328453420, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: onAttackSignal.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872974320328453420, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
+      propertyPath: onWindUpSignal.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5872974320328453421, guid: fc0b6f37b4d4fc94695cb6a855eee104, type: 3}
       propertyPath: m_RootOrder

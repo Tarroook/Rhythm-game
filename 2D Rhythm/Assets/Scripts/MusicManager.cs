@@ -101,8 +101,8 @@ public class MusicManager : MonoBehaviour
             switch (curr.action)
             {
                 case "eAttack":
-                    timelineAsset.GetOutputTrack(2).CreateMarker<EnemyWindUpSignal>(windUpSigTime).name = "EnemyWindUpSignal :" + curr.beatNb;
-                    timelineAsset.GetOutputTrack(2).CreateMarker<EnemyAttackSignal>(attackSigTime).setData("EnemyAttackSignal :" + curr.beatNb, attackSigOffset, curr.direction);
+                    timelineAsset.GetOutputTrack(2).CreateMarker<EnemyWindUpSignal>(windUpSigTime).setData("EnemyWindUpSignal :" + curr.beatNb, curr.direction);
+                    timelineAsset.GetOutputTrack(2).CreateMarker<EnemyAttackSignal>(attackSigTime).setData("EnemyAttackSignal :" + curr.beatNb, attackSigOffset);
                     break;
                 default:
                     Debug.Log("No actions recognized for marker at time :" + curr.time);
@@ -114,12 +114,12 @@ public class MusicManager : MonoBehaviour
     IEnumerator BeatLoop() // needs to be started by event
     {
         float bps = currMusicData.getBps();
-        int count = 0;
+        //int count = 0;
         while (true)
         {
             if (onBeat != null)
                 onBeat();
-            Debug.Log("Beat : " + count++);
+            //Debug.Log("Beat : " + count++);
             yield return new WaitForSeconds(bps);
         }
     }
