@@ -27,34 +27,35 @@ public class InputReact : MonoBehaviour
         phase = 2;
         sr.color = new Color(1, 0.5f, 0.016f, 1);
         //Debug.Log("phase = Good");
-        yield return waitForNextPhase(startTime);
+        yield return waitForNextPhase(startTime, 2, 10);
         phase = 3;
         sr.color = new Color(1, 0, 0, 1);
         //Debug.Log("phase = Perfect");
-        yield return waitForNextPhase(startTime);
+        yield return waitForNextPhase(startTime, 6, 10);
         phase = 2;
         sr.color = new Color(1, 0.5f, 0.016f, 1);
         //Debug.Log("phase = Good");
-        yield return waitForNextPhase(startTime);
+        yield return waitForNextPhase(startTime, 2, 10);
         phase = 1;
         sr.color = new Color(0, 1, 0, 1);
         //Debug.Log("phase = Miss");
-        yield return waitForNextPhase(startTime);
+        yield return waitForNextPhase(startTime, 1, 3);
         sr.color = new Color(1, 1, 1, 1);
         if (onTimeOver != null)
             onTimeOver(this);
     }
 
-    IEnumerator waitForNextPhase(double startTime)
+    IEnumerator waitForNextPhase(double startTime, int multiplier, int divider)
     {
-        double waitTime = (inputManager.timeToPress / 3) - startTime;
+        float totalTime = inputManager.timeToPress;
+        double waitTime = ((inputManager.timeToPress * multiplier) / divider) - startTime;
         if (waitTime > 0) // default
         {
             yield return new WaitForSeconds((float)waitTime);
         }
-        else if (waitTime > inputManager.timeToPress / 3) // if waitTime too big (shouldn't happen) 
+        else if (waitTime > ((inputManager.timeToPress * multiplier) / divider)) // if waitTime too big (shouldn't happen) 
         {
-            yield return new WaitForSeconds(inputManager.timeToPress / 3);
+            yield return new WaitForSeconds(inputManager.timeToPress / divider);
         }
         else // if waitTime is < 0
         {

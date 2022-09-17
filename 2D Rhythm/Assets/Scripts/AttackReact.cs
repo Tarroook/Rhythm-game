@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AttackReact : InputReact
 {
+    AttackInfo currAttackInfo;
+
     private void OnEnable()
     {
         EnemyBehavior.onAttack += attack;
@@ -15,9 +17,10 @@ public class AttackReact : InputReact
     }
 
 
-    void attack(double startTime)
+    void attack(AttackInfo attackInfo)
     {
         EnemyBehavior.onAttack -= attack;
-        StartCoroutine(vulnerableLoop(startTime));
+        currAttackInfo = attackInfo;
+        StartCoroutine(vulnerableLoop(attackInfo.offset));
     }
 }

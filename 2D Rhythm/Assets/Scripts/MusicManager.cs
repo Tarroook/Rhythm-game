@@ -102,7 +102,7 @@ public class MusicManager : MonoBehaviour
             {
                 case "eAttack":
                     timelineAsset.GetOutputTrack(2).CreateMarker<EnemyWindUpSignal>(windUpSigTime).name = "EnemyWindUpSignal :" + curr.beatNb;
-                    timelineAsset.GetOutputTrack(2).CreateMarker<EnemyAttackSignal>(attackSigTime).setData("EnemyAttackSignal :" + curr.beatNb, attackSigOffset);
+                    timelineAsset.GetOutputTrack(2).CreateMarker<EnemyAttackSignal>(attackSigTime).setData("EnemyAttackSignal :" + curr.beatNb, attackSigOffset, curr.direction);
                     break;
                 default:
                     Debug.Log("No actions recognized for marker at time :" + curr.time);

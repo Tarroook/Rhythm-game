@@ -12,7 +12,7 @@ public class EnemyBehavior : MonoBehaviour
     private InputManager inputManager;
     public delegate void windUpAction(AttackReact attackReact);
     public static event windUpAction onWindUp;
-    public delegate void attackAction(double startTime);
+    public delegate void attackAction(AttackInfo attackInfo);
     public static event attackAction onAttack;
     public GameObject nextReactsGB;
 
@@ -38,51 +38,11 @@ public class EnemyBehavior : MonoBehaviour
         //phase = 1;
     }// maybe make an event at beginning and end of an attack so player can't press more than once per attackEvent ?
 
-    public void attack(double startTime)
+    public void attack(AttackInfo attackInfo)
     {
         if (onAttack != null)
-            onAttack(startTime);
+            onAttack(attackInfo);
         //StartCoroutine(vulnerableLoop(startTime));
         // Debug.Log("Enemy has attacked");
     }
-    /*
-    IEnumerator vulnerableLoop(double startTime) // first miss start as long as enemy is in windup : miss->good->perfect->good->miss
-    {
-        phase = 2;
-        sr.color = new Color(1, 0.5f, 0.016f, 1);
-        Debug.Log("phase = Good");
-        yield return waitForNextPhase(startTime);
-        phase = 3;
-        sr.color = new Color(1, 0, 0, 1);
-        Debug.Log("phase = Perfect");
-        yield return waitForNextPhase(startTime);
-        phase = 2;
-        sr.color = new Color(1, 0.5f, 0.016f, 1);
-        Debug.Log("phase = Good");
-        yield return waitForNextPhase(startTime);
-        phase = 1;
-        sr.color = new Color(0, 1, 0, 1);
-        Debug.Log("phase = Miss");
-        yield return waitForNextPhase(startTime);
-        sr.color = new Color(1, 1, 1, 1);
-        isAttacking = false;
-        phase = 0;
-    }
-
-    IEnumerator waitForNextPhase(double startTime)
-    {
-        double waitTime = (inputManager.timeToPress / 3) - startTime;
-        if (waitTime > 0) // default
-        {
-            yield return new WaitForSeconds((float)waitTime);
-        }
-        else if (waitTime > inputManager.timeToPress / 3) // if waitTime too big (shouldn't happen) 
-        {
-            yield return new WaitForSeconds(inputManager.timeToPress / 3);
-        }
-        else // if waitTime is < 0
-        {
-            yield return new WaitForSeconds(0);
-        }
-    }*/
 }
