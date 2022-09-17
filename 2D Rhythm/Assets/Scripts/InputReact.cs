@@ -16,6 +16,12 @@ public class InputReact : MonoBehaviour
         inputManager = GameObject.FindGameObjectWithTag("Player").GetComponent<InputManager>();
     }
 
+    public void endReact()
+    {
+        StopAllCoroutines();
+        Destroy(this);
+    }
+
     protected IEnumerator vulnerableLoop(double startTime) //first miss start as long as enemy is in windup : miss->good->perfect->good->miss
     {
         phase = 2;

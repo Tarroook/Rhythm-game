@@ -9,6 +9,11 @@ public class AttackReact : InputReact
         EnemyBehavior.onAttack += attack;
     }
 
+    private void OnDisable()
+    {
+        EnemyBehavior.onAttack -= attack;
+    }
+
 
     void attack(double startTime)
     {

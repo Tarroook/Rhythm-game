@@ -52,7 +52,7 @@ public class InputManager : MonoBehaviour
     {
         nextInputs.Remove(ir);
         ir.onTimeOver -= removeReact;
-        Destroy(ir);
+        ir.endReact();
     }
 
     public void attackPress(AttackReact ar)
