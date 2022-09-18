@@ -5,12 +5,11 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     protected SpriteRenderer sr;
-    public float timeToPress = .4f; // 1/3 && 3/3 = good; 2/3 = perfect; 4/3 = miss (in seconds)
+    public float timeToPress = .4f; // check InputReacts for maths
     public string attackButton;
     public string dodgeRightButton;
     public string dodgeLeftButton;
     public string dodgeBackButton;
-    private EnemyBehavior enemybh;
     private MusicManager musicManager;
     public List<InputReact> nextInputs;
 
@@ -18,6 +17,7 @@ public class InputManager : MonoBehaviour
     private void OnDisable()
     {
         EnemyBehavior.onWindUp -= addAttackReact;
+        EnemyBehavior.onVulnerable -= addVulnerableReact;
         foreach (InputReact ir in nextInputs)
         {
             ir.onTimeOver -= removeReact;
@@ -28,9 +28,9 @@ public class InputManager : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         musicManager = GameObject.FindGameObjectWithTag("Music Director").GetComponent<MusicManager>();
-        enemybh = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyBehavior>();
         nextInputs = new List<InputReact>();
         EnemyBehavior.onWindUp += addAttackReact;
+        EnemyBehavior.onVulnerable += addVulnerableReact;
     }
 
     private void Update()
@@ -40,6 +40,8 @@ public class InputManager : MonoBehaviour
         InputReact ir = nextInputs[0];
         if (ir is AttackReact)
             dodgePress(ir as AttackReact);
+        else if (ir is VulnerableReact)
+            attackPress(ir as VulnerableReact);
     }
 
     private void addAttackReact(AttackReact ar, string[] dir)
@@ -49,6 +51,12 @@ public class InputManager : MonoBehaviour
         ar.onTimeOver += removeReact;
     }
 
+    private void addVulnerableReact(VulnerableReact vr)
+    {
+        nextInputs.Add(vr);
+        vr.onTimeOver += removeReact;
+    }
+
     private void removeReact(InputReact ir)
     {
         nextInputs.Remove(ir);
@@ -56,11 +64,11 @@ public class InputManager : MonoBehaviour
         ir.endReact();
     }
 
-    public void attackPress(AttackReact ar) // need to create new type for "vulnerable phases
+    public void attackPress(VulnerableReact vr) // need to create new type for "vulnerable phases
     {
         if (Input.GetButtonDown(attackButton))
         {
-            switch (ar.phase)
+            switch (vr.phase)
             {
                 case 0: // enemy not attacking
                     Debug.Log("Player attacked while enemy is not attacking");
@@ -69,19 +77,19 @@ public class InputManager : MonoBehaviour
                     Debug.Log("Player missed");
                     ParticleSystem missParticle = musicManager.currMusicData.environment.missTimingParticle;
                     Instantiate(missParticle, new Vector2(transform.position.x, transform.position.y), missParticle.transform.rotation);
-                    removeReact(ar);
+                    removeReact(vr);
                     break;
                 case 2: // good
                     Debug.Log("Player attacked good");
                     ParticleSystem goodParticle = musicManager.currMusicData.environment.goodTimingParticle;
                     Instantiate(goodParticle, new Vector2(transform.position.x, transform.position.y), goodParticle.transform.rotation);
-                    removeReact(ar);
+                    removeReact(vr);
                     break;
                 case 3: // perfect
                     Debug.Log("Player attacked perfect");
                     ParticleSystem perfParticle = musicManager.currMusicData.environment.perfectTimingParticle;
                     Instantiate(perfParticle, new Vector2(transform.position.x, transform.position.y), perfParticle.transform.rotation);
-                    removeReact(ar);
+                    removeReact(vr);
                     break;
                 default:
                     Debug.Log("Enemy phase is wrong");

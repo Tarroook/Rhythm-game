@@ -22,7 +22,7 @@ public class InputReact : MonoBehaviour
         Destroy(this);
     }
 
-    protected IEnumerator vulnerableLoop(double startTime) //first miss start as long as enemy is in windup : miss->good->perfect->good->miss
+    protected IEnumerator phaseLoop(double startTime) //first miss start as long as enemy is in windup : miss->good->perfect->good->miss
     {
         phase = 2;
         sr.color = new Color(1, 0.5f, 0.016f, 1);

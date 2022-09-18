@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Timeline;
 
-public class PlayerAttackSignal : SignalEmitter
+public class PlayerAttackSignal : ReactSignal
 {
-   
+
 }

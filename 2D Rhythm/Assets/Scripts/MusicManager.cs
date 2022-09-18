@@ -65,7 +65,7 @@ public class MusicManager : MonoBehaviour
         }
         foreach (IMarker marker in otherMarkers)
         {
-            if (marker is EnemyWindUpSignal || marker is EnemyAttackSignal)
+            if (marker is EnemyWindUpSignal || marker is EnemyAttackSignal || marker is EnemyVulnerableSignal || marker is PlayerAttackSignal)
             {
                 timelineAsset.GetOutputTrack(2).DeleteMarker(marker);
             }
@@ -74,35 +74,39 @@ public class MusicManager : MonoBehaviour
         beatEmitters.Sort(VariousMethods.sortByTime);
         int count = 0;
         float windUpTime;
-        double windUpSigTime;
+        double firstSigTime;
 
-        double attackSigTime;
+        double reactSigTime;
         double attackSigOffset;
         for (int i = 0; i < beatEmitters.Count; i++)
         {
             BeatEmitter curr = beatEmitters[i];
             curr.beatNb = ++count;
             windUpTime = curr.timeToReact * currMusicData.getBps();
-            windUpSigTime = curr.time - windUpTime;
-            attackSigTime = curr.time - inputManager.timeToPress / 2;
+            firstSigTime = curr.time - windUpTime;
+            reactSigTime = curr.time - inputManager.timeToPress / 2;
             attackSigOffset = 0;
             if (i > 0)
             {
                 if (curr.time - beatEmitters[i - 1].time < windUpTime)
                 {
-                    windUpSigTime = beatEmitters[i - 1].time + ((curr.time - beatEmitters[i - 1].time) * 0.1);
-                    if (curr.time - windUpSigTime < inputManager.timeToPress)
+                    firstSigTime = beatEmitters[i - 1].time + ((curr.time - beatEmitters[i - 1].time) * 0.1);
+                    if (curr.time - firstSigTime < inputManager.timeToPress)
                     {
-                        attackSigTime = windUpSigTime + ((curr.time - windUpTime) * 0.05);
-                        attackSigOffset = curr.time - windUpSigTime;
+                        reactSigTime = firstSigTime + ((curr.time - windUpTime) * 0.05);
+                        attackSigOffset = curr.time - firstSigTime;
                     }
                 }
             }
             switch (curr.action)
             {
                 case "eAttack":
-                    timelineAsset.GetOutputTrack(2).CreateMarker<EnemyWindUpSignal>(windUpSigTime).setData("EnemyWindUpSignal :" + curr.beatNb, curr.direction);
-                    timelineAsset.GetOutputTrack(2).CreateMarker<EnemyAttackSignal>(attackSigTime).setData("EnemyAttackSignal :" + curr.beatNb, attackSigOffset);
+                    timelineAsset.GetOutputTrack(2).CreateMarker<EnemyWindUpSignal>(firstSigTime).setData("EnemyWindUpSignal :" + curr.beatNb, curr.direction);
+                    timelineAsset.GetOutputTrack(2).CreateMarker<EnemyAttackSignal>(reactSigTime).setData("EnemyAttackSignal :" + curr.beatNb, attackSigOffset);
+                    break;
+                case "pAttack":
+                    timelineAsset.GetOutputTrack(2).CreateMarker<EnemyVulnerableSignal>(firstSigTime).name = "EnemyVulnerableSignal : " + curr.beatNb;
+                    timelineAsset.GetOutputTrack(2).CreateMarker<PlayerAttackSignal>(reactSigTime).setData("PlayerAttackSignal :" + curr.beatNb, attackSigOffset);
                     break;
                 default:
                     Debug.Log("No actions recognized for marker at time :" + curr.time);

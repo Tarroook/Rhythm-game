@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Timeline;
 
-public class EnemyAttackSignal : ReactSignal
+public class EnemyVulnerableSignal : SignalEmitter
 {
-    
+   
 }

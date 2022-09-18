@@ -18,7 +18,7 @@ public class AttackReact : InputReact
     public void attack(double startTime)
     {
         EnemyBehavior.onAttack -= attack;
-        StartCoroutine(vulnerableLoop(startTime));
+        StartCoroutine(phaseLoop(startTime));
     }
 
     public bool hits(string direction)

@@ -10,10 +10,15 @@ public class EnemyBehavior : MonoBehaviour
     public bool isAttacking = false;
     //public float phase = 0; // 0 = not attacking; 1 = miss; 2 = good; 3 = perfect
     private InputManager inputManager;
+
     public delegate void windUpAction(AttackReact attackReact, string[] dir);
     public static event windUpAction onWindUp;
     public delegate void attackAction(double startTime);
     public static event attackAction onAttack;
+    public delegate void vulnerableAction(VulnerableReact vr);
+    public static event vulnerableAction onVulnerable;
+    public delegate void defenselessAction(double startTime);
+    public static event defenselessAction onDefenseless;
     public GameObject nextReactsGB;
 
     // Start is called before the first frame update
@@ -26,8 +31,8 @@ public class EnemyBehavior : MonoBehaviour
 
     public void windUp(string[] directions)
     {
-        //StopCoroutine(vulnerableLoop(0));
-        Debug.Log("Enemy winds up");
+        //StopCoroutine(phaseLoop(0));
+        //Debug.Log("Enemy winds up");
         if (onWindUp != null)
         {
             AttackReact ar = nextReactsGB.AddComponent<AttackReact>();
@@ -42,7 +47,26 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (onAttack != null)
             onAttack(startTime);
-        //StartCoroutine(vulnerableLoop(startTime));
+        //StartCoroutine(phaseLoop(startTime));
         // Debug.Log("Enemy has attacked");
+    }
+
+    public void vulnerable()
+    {
+        if (onVulnerable != null)
+        {
+            Debug.Log("Enemy vul");
+            VulnerableReact vr = nextReactsGB.AddComponent<VulnerableReact>();
+            vr.sr = sr;
+            onVulnerable(vr);
+        }
+        sr.color = new Color(1, 0.92f, 0.016f, 1);
+    }
+
+    public void defenseless(double startTime)
+    {
+        Debug.Log("Enemy defenseless");
+        if (onDefenseless != null)
+            onDefenseless(startTime);
     }
 }
