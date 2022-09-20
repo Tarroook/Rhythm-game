@@ -15,7 +15,7 @@ public class EnemyBehavior : MonoBehaviour
     public static event windUpAction onWindUp;
     public delegate void attackAction(double startTime);
     public static event attackAction onAttack;
-    public delegate void vulnerableAction(VulnerableReact vr);
+    public delegate void vulnerableAction(VulnerableReact vr); // need to remove react parameters and nextReactGB and put them in InputManager
     public static event vulnerableAction onVulnerable;
     public delegate void defenselessAction(double startTime);
     public static event defenselessAction onDefenseless;
