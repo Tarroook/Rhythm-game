@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 184190632}
   - component: {fileID: 184190631}
   - component: {fileID: 184190634}
+  - component: {fileID: 184190635}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -157,7 +158,6 @@ MonoBehaviour:
   idleSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   attackSprite: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
   isAttacking: 0
-  nextReactsGB: {fileID: 880011996}
 --- !u!212 &184190632
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -242,6 +242,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &184190635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184190630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3439556a098f4b246ba278eadbf6488f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tiredParticle: {fileID: 1252548282241684303, guid: 03d8b1133114f6943bbb5532bdea2240, type: 3}
 --- !u!1001 &275315052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -513,6 +526,7 @@ MonoBehaviour:
   dodgeLeftButton: Dodge Left
   dodgeBackButton: Dodge Back
   nextInputs: []
+  nextReactsGB: {fileID: 880011996}
 --- !u!212 &359254517
 SpriteRenderer:
   m_ObjectHideFlags: 0

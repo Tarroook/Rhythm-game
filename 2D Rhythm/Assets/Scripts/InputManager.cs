@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour
     public string dodgeBackButton;
     private MusicManager musicManager;
     public List<InputReact> nextInputs;
+    public GameObject nextReactsGB;
 
 
     private void OnDisable()
@@ -44,15 +45,20 @@ public class InputManager : MonoBehaviour
             attackPress(ir as VulnerableReact);
     }
 
-    private void addAttackReact(AttackReact ar, string[] dir)
+    private void addAttackReact(string[] dir)
     {
+        AttackReact ar = nextReactsGB.AddComponent<AttackReact>();
+        ar.sr = sr;
         nextInputs.Add(ar);
         ar.directions = dir;
         ar.onTimeOver += removeReact;
     }
 
-    private void addVulnerableReact(VulnerableReact vr)
+    private void addVulnerableReact()
     {
+        
+        VulnerableReact vr = nextReactsGB.AddComponent<VulnerableReact>();
+        vr.sr = sr;
         nextInputs.Add(vr);
         vr.onTimeOver += removeReact;
     }

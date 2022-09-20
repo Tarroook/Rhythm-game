@@ -11,15 +11,15 @@ public class EnemyBehavior : MonoBehaviour
     //public float phase = 0; // 0 = not attacking; 1 = miss; 2 = good; 3 = perfect
     private InputManager inputManager;
 
-    public delegate void windUpAction(AttackReact attackReact, string[] dir);
+    public delegate void windUpAction(string[] dir);
     public static event windUpAction onWindUp;
     public delegate void attackAction(double startTime);
     public static event attackAction onAttack;
-    public delegate void vulnerableAction(VulnerableReact vr); // need to remove react parameters and nextReactGB and put them in InputManager
+    public delegate void vulnerableAction(); // need to remove react parameters and nextReactGB and put them in InputManager
     public static event vulnerableAction onVulnerable;
     public delegate void defenselessAction(double startTime);
     public static event defenselessAction onDefenseless;
-    public GameObject nextReactsGB;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -35,9 +35,7 @@ public class EnemyBehavior : MonoBehaviour
         //Debug.Log("Enemy winds up");
         if (onWindUp != null)
         {
-            AttackReact ar = nextReactsGB.AddComponent<AttackReact>();
-            ar.sr = sr;
-            onWindUp(ar, directions);
+            onWindUp(directions);
         }
         sr.color = new Color(1, 0.92f, 0.016f, 1);
         //phase = 1;
@@ -56,9 +54,7 @@ public class EnemyBehavior : MonoBehaviour
         if (onVulnerable != null)
         {
             Debug.Log("Enemy vul");
-            VulnerableReact vr = nextReactsGB.AddComponent<VulnerableReact>();
-            vr.sr = sr;
-            onVulnerable(vr);
+            onVulnerable();
         }
         sr.color = new Color(1, 0.92f, 0.016f, 1);
     }

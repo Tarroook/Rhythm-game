@@ -17,7 +17,7 @@ public class EnemyParticles : MonoBehaviour
     }
 
 
-    private void vulnerablePart(VulnerableReact vr)
+    private void vulnerablePart()
     {
         Instantiate(tiredParticle, gameObject.transform.position, tiredParticle.transform.rotation);
     }
