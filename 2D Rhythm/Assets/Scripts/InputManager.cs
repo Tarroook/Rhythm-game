@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    protected SpriteRenderer sr;
     public float timeToPress = .4f; // check InputReacts for maths
 
     public delegate void attackAction();
@@ -14,10 +13,10 @@ public class InputManager : MonoBehaviour
     public static event dodgedRightAction onDodgeRight;
 
     public delegate void dodgedLeftAction();
-    public static event dodgedLeftAction onLeftRight;
+    public static event dodgedLeftAction onDodgeLeft;
 
     public delegate void dodgedBackAction();
-    public static event dodgedBackAction onBackRight;
+    public static event dodgedBackAction onDodgeBack;
 
     public delegate void hitAction();
     public static event hitAction onHit;
@@ -39,7 +38,6 @@ public class InputManager : MonoBehaviour
 
     private void Start()
     {
-        sr = GetComponent<SpriteRenderer>();
         musicManager = GameObject.FindGameObjectWithTag("Music Director").GetComponent<MusicManager>();
         nextInputs = new List<InputReact>();
         EnemyBehavior.onWindUp += addAttackReact;
@@ -60,7 +58,6 @@ public class InputManager : MonoBehaviour
     private void addAttackReact(string[] dir)
     {
         AttackReact ar = nextReactsGB.AddComponent<AttackReact>();
-        ar.sr = sr;
         nextInputs.Add(ar);
         ar.directions = dir;
         ar.onTimeOver += removeReact;
@@ -70,7 +67,6 @@ public class InputManager : MonoBehaviour
     {
         
         VulnerableReact vr = nextReactsGB.AddComponent<VulnerableReact>();
-        vr.sr = sr;
         nextInputs.Add(vr);
         vr.onTimeOver += removeReact;
     }
@@ -169,12 +165,20 @@ public class InputManager : MonoBehaviour
         switch (direction)
         {
             case "left":
+                if (onDodgeLeft != null)
+                    onDodgeLeft();
                 break;
             case "right":
+                if (onDodgeRight != null)
+                    onDodgeRight();
                 break;
             case "back":
+                if (onDodgeBack != null)
+                    onDodgeBack();
                 break;
             case "attack":
+                if (onPressedAttack != null)
+                    onPressedAttack();
                 break;
         }
     }
