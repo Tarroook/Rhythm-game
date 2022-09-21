@@ -101,10 +101,7 @@ public class InputManager : MonoBehaviour
                     Debug.Log("Enemy phase is wrong");
                     break;
             }
-        }
-        else if (Input.GetButtonUp(attackButton))
-        {
-
+            inputEvents("attack");
         }
     }
 
@@ -116,7 +113,7 @@ public class InputManager : MonoBehaviour
         else if (Input.GetButtonDown(dodgeRightButton))
             directionDodged = "right";
         else if (Input.GetButtonDown(dodgeBackButton))
-            directionDodged = "front";
+            directionDodged = "back";
 
         if(!directionDodged.Equals("none"))
         {
@@ -128,9 +125,6 @@ public class InputManager : MonoBehaviour
             {
                 switch (ar.phase)
                 {
-                    case 0: // enemy not attacking
-                        Debug.Log("Player attacked while enemy is not attacking");
-                        break;
                     case 1: // miss
                         Debug.Log("Player got hit");
                         ParticleSystem missParticle = musicManager.currMusicData.environment.missTimingParticle;
@@ -154,6 +148,22 @@ public class InputManager : MonoBehaviour
                         break;
                 }
             }
+            inputEvents(directionDodged);
+        }
+    }
+
+    public void inputEvents(string direction)
+    {
+        switch (direction)
+        {
+            case "left":
+                break;
+            case "right":
+                break;
+            case "back":
+                break;
+            case "attack":
+                break;
         }
     }
 }
