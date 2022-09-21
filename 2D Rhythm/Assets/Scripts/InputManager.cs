@@ -6,10 +6,22 @@ public class InputManager : MonoBehaviour
 {
     protected SpriteRenderer sr;
     public float timeToPress = .4f; // check InputReacts for maths
-    public string attackButton;
-    public string dodgeRightButton;
-    public string dodgeLeftButton;
-    public string dodgeBackButton;
+
+    public delegate void attackAction();
+    public static event attackAction onPressedAttack;
+
+    public delegate void dodgedRightAction();
+    public static event dodgedRightAction onDodgeRight;
+
+    public delegate void dodgedLeftAction();
+    public static event dodgedLeftAction onLeftRight;
+
+    public delegate void dodgedBackAction();
+    public static event dodgedBackAction onBackRight;
+
+    public delegate void hitAction();
+    public static event hitAction onHit;
+
     private MusicManager musicManager;
     public List<InputReact> nextInputs;
     public GameObject nextReactsGB;
@@ -72,7 +84,7 @@ public class InputManager : MonoBehaviour
 
     public void attackPress(VulnerableReact vr) // need to create new type for "vulnerable phases
     {
-        if (Input.GetButtonDown(attackButton))
+        if (Input.GetButtonDown("Attack Forward"))
         {
             switch (vr.phase)
             {
@@ -108,11 +120,11 @@ public class InputManager : MonoBehaviour
     public void dodgePress(AttackReact ar)
     {
         string directionDodged = "none";
-        if (Input.GetButtonDown(dodgeLeftButton))
+        if (Input.GetButtonDown("Dodge Left"))
             directionDodged = "left";
-        else if (Input.GetButtonDown(dodgeRightButton))
+        else if (Input.GetButtonDown("Dodge Right"))
             directionDodged = "right";
-        else if (Input.GetButtonDown(dodgeBackButton))
+        else if (Input.GetButtonDown("Dodge Back"))
             directionDodged = "back";
 
         if(!directionDodged.Equals("none"))
