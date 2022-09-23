@@ -5,10 +5,13 @@ using UnityEngine;
 public class SpriteAnimations : MonoBehaviour
 {
     private Animator anim;
+    private MusicData currMusic;
+    private IEnumerator stopDodge;
 
     private void OnEnable()
     {
         MusicManager.onBeat += beatAnimation;
+        MusicManager.onMusicChanged += setMusic;
         InputManager.onPressedAttack += attackAnimation;
         InputManager.onPressedDodge += dodgeAnimation;
     }
@@ -21,6 +24,12 @@ public class SpriteAnimations : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
+        stopDodge = stopDodgeCoroutine();
+    }
+
+    private void setMusic(MusicData music)
+    {
+        currMusic = music;
     }
 
     private void beatAnimation()
@@ -44,5 +53,14 @@ public class SpriteAnimations : MonoBehaviour
                 anim.SetTrigger("SlideRight");
                 break;
         }
+
+        StopCoroutine(stopDodge);
+        StartCoroutine(stopDodge);
+    }
+
+    private IEnumerator stopDodgeCoroutine()
+    {
+        yield return new WaitForSeconds(currMusic.getBps());
+        anim.SetTrigger("ReturnToMiddle");
     }
 }
