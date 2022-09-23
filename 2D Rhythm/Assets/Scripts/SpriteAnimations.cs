@@ -18,7 +18,9 @@ public class SpriteAnimations : MonoBehaviour
     private void OnDisable()
     {
         MusicManager.onBeat -= beatAnimation;
+        MusicManager.onMusicChanged -= setMusic;
         InputManager.onPressedAttack -= attackAnimation;
+        InputManager.onPressedDodge -= dodgeAnimation;
     }
 
     private void Start()
