@@ -498,6 +498,7 @@ GameObject:
   m_Component:
   - component: {fileID: 359254518}
   - component: {fileID: 359254516}
+  - component: {fileID: 359254517}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -518,12 +519,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToPress: 0.3
-  attackButton: Attack Forward
-  dodgeRightButton: Dodge Right
-  dodgeLeftButton: Dodge Left
-  dodgeBackButton: Dodge Back
   nextInputs: []
   nextReactsGB: {fileID: 880011996}
+--- !u!114 &359254517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 359254515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9778d0520c00a94bb7be20b6b2660db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &359254518
 Transform:
   m_ObjectHideFlags: 0

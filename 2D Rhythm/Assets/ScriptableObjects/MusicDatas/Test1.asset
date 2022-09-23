@@ -14,6 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Harlem Shuffle
   bpm: 116
-  timeline:
-  - {fileID: 11400000, guid: 9dc2d5fd777af6c41b88c33225923da6, type: 2}
+  timeline: {fileID: 11400000, guid: 9dc2d5fd777af6c41b88c33225923da6, type: 2}
   environment: {fileID: 11400000, guid: f509bf588b81576459baed46a835f3fc, type: 2}
