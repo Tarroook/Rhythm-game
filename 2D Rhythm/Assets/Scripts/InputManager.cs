@@ -6,22 +6,22 @@ public class InputManager : MonoBehaviour
 {
     public float timeToPress = .4f; // check InputReacts for maths
 
-    public delegate void attackAction();
-    public static event attackAction onPressedAttack;
+    public delegate void attackPressedAction();
+    public static event attackPressedAction onPressedAttack;
 
-    public delegate void dodgedRightAction();
-    public static event dodgedRightAction onDodgeRight;
+    public delegate void dodgedPressedAction(string direction);
+    public static event dodgedPressedAction onPressedDodge;
 
-    public delegate void dodgedLeftAction();
-    public static event dodgedLeftAction onDodgeLeft;
+    public delegate void attackAction(int timing);
+    public static event attackAction onAttack;
 
-    public delegate void dodgedBackAction();
-    public static event dodgedBackAction onDodgeBack;
+    public delegate void dodgedAction(int timing);
+    public static event dodgedAction onDodged;
 
     public delegate void hitAction();
     public static event hitAction onHit;
 
-    private MusicManager musicManager;
+    
     public List<InputReact> nextInputs;
     public GameObject nextReactsGB;
 
@@ -38,7 +38,6 @@ public class InputManager : MonoBehaviour
 
     private void Start()
     {
-        musicManager = GameObject.FindGameObjectWithTag("Music Director").GetComponent<MusicManager>();
         nextInputs = new List<InputReact>();
         EnemyBehavior.onWindUp += addAttackReact;
         EnemyBehavior.onVulnerable += addVulnerableReact;
@@ -82,34 +81,11 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Attack Forward"))
         {
-            switch (vr.phase)
-            {
-                case 0: // enemy not attacking
-                    Debug.Log("Player attacked while enemy is not attacking");
-                    break;
-                case 1: // miss
-                    Debug.Log("Player missed");
-                    ParticleSystem missParticle = musicManager.currMusicData.environment.missTimingParticle;
-                    Instantiate(missParticle, new Vector2(transform.position.x, transform.position.y), missParticle.transform.rotation);
-                    removeReact(vr);
-                    break;
-                case 2: // good
-                    Debug.Log("Player attacked good");
-                    ParticleSystem goodParticle = musicManager.currMusicData.environment.goodTimingParticle;
-                    Instantiate(goodParticle, new Vector2(transform.position.x, transform.position.y), goodParticle.transform.rotation);
-                    removeReact(vr);
-                    break;
-                case 3: // perfect
-                    Debug.Log("Player attacked perfect");
-                    ParticleSystem perfParticle = musicManager.currMusicData.environment.perfectTimingParticle;
-                    Instantiate(perfParticle, new Vector2(transform.position.x, transform.position.y), perfParticle.transform.rotation);
-                    removeReact(vr);
-                    break;
-                default:
-                    Debug.Log("Enemy phase is wrong");
-                    break;
-            }
-            inputEvents("attack");
+            if (onAttack != null)
+                onAttack(vr.phase);
+            removeReact(vr);
+            if(onPressedAttack != null)
+                onPressedAttack();
         }
     }
 
@@ -126,60 +102,19 @@ public class InputManager : MonoBehaviour
         if(!directionDodged.Equals("none"))
         {
             if (ar.hits(directionDodged)){
-                Debug.Log("Player got hit in wrong dir");
-                removeReact(ar);
+                if (onDodged != null)
+                    onDodged(1);
             }
             else
             {
-                switch (ar.phase)
-                {
-                    case 1: // miss
-                        Debug.Log("Player got hit");
-                        ParticleSystem missParticle = musicManager.currMusicData.environment.missTimingParticle;
-                        Instantiate(missParticle, new Vector2(transform.position.x, transform.position.y), missParticle.transform.rotation);
-                        removeReact(ar);
-                        break;
-                    case 2: // good
-                        Debug.Log("Player dodged good");
-                        ParticleSystem goodParticle = musicManager.currMusicData.environment.goodTimingParticle;
-                        Instantiate(goodParticle, new Vector2(transform.position.x, transform.position.y), goodParticle.transform.rotation);
-                        removeReact(ar);
-                        break;
-                    case 3: // perfect
-                        Debug.Log("Player dodged perfect");
-                        ParticleSystem perfParticle = musicManager.currMusicData.environment.perfectTimingParticle;
-                        Instantiate(perfParticle, new Vector2(transform.position.x, transform.position.y), perfParticle.transform.rotation);
-                        removeReact(ar);
-                        break;
-                    default:
-                        Debug.Log("Enemy phase is wrong");
-                        break;
-                }
+                if (ar.phase == 1 && onHit != null)
+                    onHit();
+                if (onDodged != null)
+                    onDodged(ar.phase);
             }
-            inputEvents(directionDodged);
-        }
-    }
-
-    public void inputEvents(string direction)
-    {
-        switch (direction)
-        {
-            case "left":
-                if (onDodgeLeft != null)
-                    onDodgeLeft();
-                break;
-            case "right":
-                if (onDodgeRight != null)
-                    onDodgeRight();
-                break;
-            case "back":
-                if (onDodgeBack != null)
-                    onDodgeBack();
-                break;
-            case "attack":
-                if (onPressedAttack != null)
-                    onPressedAttack();
-                break;
+            removeReact(ar);
+            if (onPressedDodge != null)
+                onPressedDodge(directionDodged);
         }
     }
 }

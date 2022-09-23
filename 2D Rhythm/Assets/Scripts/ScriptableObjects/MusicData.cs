@@ -8,7 +8,7 @@ public class MusicData : ScriptableObject
 {
     public new string name;
     public float bpm;
-    public TimelineAsset[] timeline;
+    public TimelineAsset timeline;
     public EnvironmentData environment;
 
     public float getBps()

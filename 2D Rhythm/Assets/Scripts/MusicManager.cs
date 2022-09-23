@@ -11,8 +11,9 @@ public class MusicManager : MonoBehaviour
     private PlayableDirector playableDirector;
     private MusicList musicList;
     public MusicData currMusicData;
+    public delegate void changedMusicAction(MusicData music);
+    public static event changedMusicAction onMusicChanged;
     private InputManager inputManager;
-    private int currDifficulty;
     public delegate void beatAction();
     public static event beatAction onBeat;
     private IEnumerator beatLoop;
@@ -41,15 +42,16 @@ public class MusicManager : MonoBehaviour
     public void setMusic(string musicName, int difficulty)
     {
         currMusicData = musicList.getMusicFromName(musicName);
-        currDifficulty = difficulty;
+        if (onMusicChanged != null)
+            onMusicChanged(currMusicData);
         Debug.Log("set Music");
-        playableDirector.playableAsset = currMusicData.timeline[currDifficulty];
+        playableDirector.playableAsset = currMusicData.timeline;
         setSignals();
     }
 
     public void setSignals()
     {
-        TimelineAsset timelineAsset = currMusicData.timeline[currDifficulty];
+        TimelineAsset timelineAsset = currMusicData.timeline;
         IMarker[] beatMarkers = timelineAsset.GetOutputTrack(1).GetMarkers().ToArray();
         IMarker[] otherMarkers = timelineAsset.GetOutputTrack(2).GetMarkers().ToArray();
 

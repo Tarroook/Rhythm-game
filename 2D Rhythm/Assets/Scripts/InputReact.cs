@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InputReact : MonoBehaviour
 {
-    public float phase = 1; // 0 = not attacking; 1 = miss; 2 = good; 3 = perfect
+    public int phase = 1; // 0 = not attacking; 1 = miss; 2 = good; 3 = perfect
     private InputManager inputManager;
     public delegate void timeOver(InputReact thisToDelete);
     public event timeOver onTimeOver;
