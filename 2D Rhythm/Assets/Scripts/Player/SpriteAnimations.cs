@@ -36,7 +36,7 @@ public class SpriteAnimations : MonoBehaviour
 
     private void beatAnimation()
     {
-        anim.Play("Bounce Layer.Player_Bounce", 1);
+        anim.SetTrigger("Bounce");
     }
 
     private void attackAnimation()
@@ -46,6 +46,7 @@ public class SpriteAnimations : MonoBehaviour
 
     private void dodgeAnimation(string direction)
     {
+        StopCoroutine(stopDodge);
         switch (direction)
         {
             case "left":
@@ -55,8 +56,6 @@ public class SpriteAnimations : MonoBehaviour
                 anim.SetTrigger("SlideRight");
                 break;
         }
-
-        StopCoroutine(stopDodge);
         StartCoroutine(stopDodge);
     }
 
