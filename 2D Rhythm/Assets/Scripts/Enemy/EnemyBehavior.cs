@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class EnemyBehavior : MonoBehaviour
 {
-    private SpriteRenderer sr;
     public Sprite idleSprite;
     public Sprite attackSprite;
     public bool isAttacking = false;
     //public float phase = 0; // 0 = not attacking; 1 = miss; 2 = good; 3 = perfect
-    private InputManager inputManager;
 
     public delegate void windUpAction(string[] dir);
     public static event windUpAction onWindUp;
@@ -19,15 +17,7 @@ public class EnemyBehavior : MonoBehaviour
     public static event vulnerableAction onVulnerable;
     public delegate void defenselessAction(double startTime);
     public static event defenselessAction onDefenseless;
-    
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        sr = GetComponent<SpriteRenderer>();
-        inputManager = GameObject.FindGameObjectWithTag("Player").GetComponent<InputManager>();
-        sr.color = new Color(1, 1, 1, 1);
-    }
 
     public void windUp(string[] directions)
     {
@@ -37,7 +27,6 @@ public class EnemyBehavior : MonoBehaviour
         {
             onWindUp(directions);
         }
-        sr.color = new Color(1, 0.92f, 0.016f, 1);
         //phase = 1;
     }// maybe make an event at beginning and end of an attack so player can't press more than once per attackEvent ?
 
@@ -56,7 +45,6 @@ public class EnemyBehavior : MonoBehaviour
             Debug.Log("Enemy vul");
             onVulnerable();
         }
-        sr.color = new Color(1, 0.92f, 0.016f, 1);
     }
 
     public void defenseless(double startTime)

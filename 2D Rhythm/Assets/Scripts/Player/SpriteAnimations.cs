@@ -6,7 +6,6 @@ public class SpriteAnimations : MonoBehaviour
 {
     private Animator anim;
     private MusicData currMusic;
-    private bool stopDodgeRunning;
     private Coroutine stopDodge;
 
     private void OnEnable()
@@ -41,7 +40,10 @@ public class SpriteAnimations : MonoBehaviour
 
     private void attackAnimation()
     {
-        
+        if (stopDodge != null)
+            StopCoroutine(stopDodge);
+        anim.SetTrigger("SlideUp");
+        stopDodge = StartCoroutine(returnMiddleCoroutine(.5f));
     }
 
     private void dodgeAnimation(string direction)
@@ -57,13 +59,13 @@ public class SpriteAnimations : MonoBehaviour
                 anim.SetTrigger("SlideRight");
                 break;
         }
-        stopDodge = StartCoroutine(stopDodgeCoroutine());
+        stopDodge = StartCoroutine(returnMiddleCoroutine(1));
     }
 
-    private IEnumerator stopDodgeCoroutine()
+    private IEnumerator returnMiddleCoroutine(float nbBeat)
     {
         Debug.Log("started coroutine");
-        yield return new WaitForSeconds(currMusic.getBps());
+        yield return new WaitForSeconds(currMusic.getBps() * nbBeat);
         Debug.Log("return to middle");
         anim.SetTrigger("ReturnToMiddle");
     }
